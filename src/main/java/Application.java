@@ -11,16 +11,16 @@ public class Application {
         java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.OFF);
         // stringEmployeeId(2);
         DAO.EmployeeDAO employeeDAO = new DAO.EmployeeDAOImpl();
-        Employee employee1 = new Employee("Vadim", "Vadimov", "men", 35);
+        Employee employee1 = new Employee("Vadim", "Vadimov", "men", 45);
         employeeDAO.saveEmployee(employee1);
-
+       Employee employee2 = new Employee(20,"German", "Gromko", "men", 15);
+       employeeDAO.updateEmployee(employee2);
+       Employee employee3 = new Employee(66);
+       employeeDAO.deleteEmployee(employee3);
         List<Employee> list = employeeDAO.allEmployee();
         for (Employee employee : list) {
-        System.out.println(employee);
+            System.out.println(employee);
         }
-       Employee employee2 = new Employee("German", "Gromov", "men", 35);
-        employeeDAO.updateEmployee(employee2);
-        employeeDAO.deleteEmployee(employee2);
     }
     /*private static String stringEmployeeId(int id) {
         String sql = "SELECT employee.first_name, employee.last_name, employee.gender, city.city_name" +
