@@ -4,6 +4,7 @@ import model.Employee;
 
 import java.sql.*;
 import java.util.List;
+import java.util.logging.Level;
 
 /** выскакивает такая ошибка не могу понять в чем дело
  * мар. 30, 2023 11:29:18 PM org.hibernate.Version logVersion
@@ -37,18 +38,23 @@ import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
+        java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.OFF);
         // stringEmployeeId(2);
         DAO.EmployeeDAO employeeDAO = new DAO.EmployeeDAOImpl();
-        Employee employee1 = new Employee("Vadim", "Sokolov", "men", 35);
-        employeeDAO.saveEmployee(employee1);
+       // Employee employee1 = new Employee("Vadim", "Vadimov", "men", 35);
+       // employeeDAO.saveEmployee(employee1);
 
         //List<Employee> list = employeeDAO.allEmployee();
-        //for (Employee employee : list) {
+       // for (Employee employee : list) {
         //    System.out.println(employee);
         //}
-       //Employee employee2 = new Employee("German", "Gromov", "men", 35, 2);
-       // employeeDAO.updateEmployee(employee2);
-       // employeeDAO.deleteEmployee(employee2);
+       Employee employee2 = new Employee("German", "Gromov", "men", 35);
+        employeeDAO.updateEmployee(20, employee2);
+        List<Employee> list = employeeDAO.allEmployee();
+         for (Employee employee : list) {
+            System.out.println(employee);
+        }
+        //employeeDAO.deleteEmployee(employee2);
     }
     /*private static String stringEmployeeId(int id) {
         String sql = "SELECT employee.first_name, employee.last_name, employee.gender, city.city_name" +

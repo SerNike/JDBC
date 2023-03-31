@@ -2,6 +2,9 @@ package DAO;
 
 import model.Employee;
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
@@ -17,10 +20,13 @@ public class HibernateSessionFactoryUtil {
                 configuration.addAnnotatedClass(Employee.class);
                 StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
                 sessionFactory = configuration.buildSessionFactory(builder.build());
+
             } catch (Exception e) {
-                System.out.println("ПЕСНЯ" + e);
+                System.out.println("Исключение!" + e);
             }
         }
         return sessionFactory;
     }
 }
+
+
