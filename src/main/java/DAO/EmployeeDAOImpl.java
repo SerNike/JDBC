@@ -11,14 +11,8 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     @Override
     public Employee saveEmployee(Employee employee) {
         try (Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();) {
-            // Создаем транзакцию и начинаем ее
             Transaction transaction = session.beginTransaction();
-            // вызываем на объекте сессии метод save
-            // данный метод внутри себя содержит необходимый запрос к базе
-            // для создания новой строки
             session.save(employee);
-            // Выполняем коммит, то есть сохраняем изменения,
-            // которые совершили в рамках транзакции
             transaction.commit();
         }
         return employee;
@@ -36,20 +30,22 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
         @Override
-        public void updateEmployee (int id, Employee employee){
+        public Employee updateEmployee (Employee employee){
             try (Session session = getSessionFactory().openSession()) {
                 Transaction transaction = session.beginTransaction();
                 session.update(employee);
                 transaction.commit();
             }
+            return employee;
         }
 
         @Override
-        public void deleteEmployee (Employee employee){
+        public Employee deleteEmployee (Employee employee){
             try (Session session = getSessionFactory().openSession()) {
                 Transaction transaction = session.beginTransaction();
                 session.delete(employee);
                 transaction.commit();
             }
+            return employee;
         }
     }
