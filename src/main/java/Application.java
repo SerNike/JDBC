@@ -20,7 +20,7 @@ public class Application {
         }
        Employee employee2 = new Employee("German", "Gromov", "men", 35);
         employeeDAO.updateEmployee(employee2);
-        employeeDAO.deleteEmployee(employee1);
+        employeeDAO.deleteEmployee(employee2);
     }
     /*private static String stringEmployeeId(int id) {
         String sql = "SELECT employee.first_name, employee.last_name, employee.gender, city.city_name" +
