@@ -15,7 +15,7 @@ public class Application {
         employeeDAO.saveEmployee(employee1);
        Employee employee2 = new Employee(20,"German", "Gromko", "men", 15);
        employeeDAO.updateEmployee(employee2);
-       Employee employee3 = new Employee(59);
+       Employee employee3 = new Employee(58);
        employeeDAO.deleteEmployee(employee3);
         List<Employee> list = employeeDAO.allEmployee();
         for (Employee employee : list) {
