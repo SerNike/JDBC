@@ -21,15 +21,20 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
         @Override
         public Employee employeeFromId(int id){
-        return getSessionFactory().openSession().get(Employee.class, id);
-            }
+        try (Session session = HibernateSessionFactoryUtil.getSessionFactory()
+                .openSession()){
+            return session.get(Employee.class, id);
+        }
+    }
 
         @Override
         public List<Employee> allEmployee () {
-            List users = getSessionFactory().openSession()
-                    .createQuery("From Employee", Employee.class).list();
-            return users;
-    }
+            try (Session session = HibernateSessionFactoryUtil.getSessionFactory()
+                    .openSession()) {
+                return session.createQuery("SELECT * FROM employee s LEFT JOIN FETCH s.city", Employee.class).list();
+            }
+        }
+
 
         @Override
         public Employee updateEmployee ( Employee employee){
