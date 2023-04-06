@@ -22,6 +22,8 @@ public class Employee {
     private String gender;
     @Column(name = "age")
     private int age;
+    // Получается, что у меня весь код работает, но если city_id раскоментить ничего не работает
+    // и выдает ошибку
     /*@Column(name = "city_id")
     private int cityId;*/
 
