@@ -1,9 +1,12 @@
 package DAO;
+import model.City;
 import model.Employee;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.List;
+import java.util.Queue;
 
 import static DAO.HibernateSessionFactoryUtil.getSessionFactory;
 
@@ -31,7 +34,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         public List<Employee> allEmployee () {
             try (Session session = HibernateSessionFactoryUtil.getSessionFactory()
                     .openSession()) {
-                return session.createQuery("SELECT * FROM employee s LEFT JOIN FETCH s.city", Employee.class).list();
+                return session.createQuery("FROM Employee c LEFT JOIN FETCH c.city", Employee.class).list();
             }
         }
 
@@ -43,8 +46,6 @@ public class EmployeeDAOImpl implements EmployeeDAO {
                 Transaction transaction = session.beginTransaction();
                 session.update(employee);
                 transaction.commit();
-
-
             }
             return employee;
         }
@@ -58,4 +59,16 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             }
             return employee;
         }
+
+        // немного запутался как правильно метода написать
+    @Override
+    public List<Employee> employeesInCities(Integer cityId) {
+        City city = new City();
+        try (Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
+            Query<Employee> query = session.createQuery("FROM Employee s JOIN FETCH s.city " +
+                    "c WHERE Employee.city = City.cityId", Employee.class);
+            query.setParameter("city", city.getNameCity() );
+            return query.list();
+        }
     }
+}

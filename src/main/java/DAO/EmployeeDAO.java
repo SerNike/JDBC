@@ -1,5 +1,6 @@
 package DAO;
 
+import model.City;
 import model.Employee;
 
 import java.util.List;
@@ -12,5 +13,7 @@ public interface EmployeeDAO {
     Employee updateEmployee( Employee employee);
 
     Employee deleteEmployee( Employee employee);
+
+    List<Employee> employeesInCities(Integer cityId);
 
 }

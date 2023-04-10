@@ -1,5 +1,8 @@
+import DAO.CityDAO;
+import DAO.CityDAOImpl;
 import DAO.EmployeeDAO;
 import DAO.EmployeeDAOImpl;
+import model.City;
 import model.Employee;
 
 import java.sql.*;
@@ -11,16 +14,38 @@ public class Application {
         java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.OFF);
         // stringEmployeeId(2);
         DAO.EmployeeDAO employeeDAO = new DAO.EmployeeDAOImpl();
-        Employee employee1 = new Employee("Ivan", "Ivanov", "men", 55);
-        employeeDAO.saveEmployee(employee1);
-        System.out.println(employeeDAO.employeeFromId(7));
-        employeeDAO.updateEmployee(
-                new Employee(81, "Andrey", "Buzmakov", "men", 30 ));
-        employeeDAO.deleteEmployee(new Employee(84));
+        DAO.CityDAO cityDAO = new CityDAOImpl();
+
+// все методы, которые есть в City отрабатывают также как и в Employee
+// только если метода allEmployee выводит как сотрудников так и город, то метод allCity
+// выводит только города
+
+//
+//
+    City city1 = new City("Saratov");
+        List<City> listCity = cityDAO.allCity();
+        for (City city : listCity) {
+            System.out.println(city);
+        }
+        System.out.println("-------------------");
+
         List<Employee> list = employeeDAO.allEmployee();
         for (Employee employee : list) {
             System.out.println(employee);
         }
+
+
+         /*Employee employee1 = new Employee("Slava", "Fomin", "men",
+                 21, cityDAO.cityFromId(5));
+        employeeDAO.saveEmployee(employee1);*/
+        /*System.out.println(employeeDAO.employeeFromId(7));
+        employeeDAO.updateEmployee(
+                new Employee(87, "Maxim", "Shumilov", "men", 18 ));
+        employeeDAO.deleteEmployee(new Employee(82));*/
+        /*List<Employee> list = employeeDAO.allEmployee();
+        for (Employee employee : list) {
+            System.out.println(employee);
+        }*/
     }
 }
     /*private static String stringEmployeeId(int id) {

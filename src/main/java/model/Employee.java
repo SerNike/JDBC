@@ -1,12 +1,11 @@
 package model;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Objects;
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
+@EqualsAndHashCode
 @Entity
 @Table(name = "Employee")
 public class Employee {
@@ -22,17 +21,17 @@ public class Employee {
     private String gender;
     @Column(name = "age")
     private int age;
-    // Получается, что у меня весь код работает, но если city_id раскоментить ничего не работает
-    // и выдает ошибку
-    /*@Column(name = "city_id")
-    private int cityId;*/
 
-    public Employee(String firstName, String lastName, String gender, int age/*, int cityId*/ ) {
+    @ManyToOne
+    @JoinColumn (name = "city_id", referencedColumnName = "city_id", nullable = false)
+    private City city;
+
+    public Employee(String firstName, String lastName, String gender, int age, City city ) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
         this.age = age;
-       // this.cityId = cityId;
+        this.city = city;
     }
 
     public Employee(int id, String firstName, String lastName, String gender, int age) {
@@ -45,6 +44,22 @@ public class Employee {
 
     public Employee(int id) {
         this.id = id;
+    }
+
+    public Employee() {
+
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", gender='" + gender + '\'' +
+                ", age=" + age +
+                ", city=" + city +
+                '}';
     }
 }
 
