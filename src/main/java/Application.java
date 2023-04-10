@@ -34,6 +34,10 @@ public class Application {
             System.out.println(employee);
         }
 
+        System.out.println(cityDAO.employeesByCity(5));
+        System.out.println("----------");
+        // пытался чтобы метод принимал id города он выдал ошибки писал по разному метод постоянные ошибки
+        System.out.println(employeeDAO.employeesInCities(city1));
 
          /*Employee employee1 = new Employee("Slava", "Fomin", "men",
                  21, cityDAO.cityFromId(5));

@@ -14,6 +14,6 @@ public interface EmployeeDAO {
 
     Employee deleteEmployee( Employee employee);
 
-    List<Employee> employeesInCities(Integer cityId);
+    List<Employee> employeesInCities(City city);
 
 }
